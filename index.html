@@ -1,15 +1,120 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-  <title> GitHub Pages </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人主页</title>
+    <style>
+        /* 基础样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* 布局容器 */
+        .container {
+            text-align: center;
+        }
+
+        /* 头像样式 */
+        .avatar {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            margin: 0 auto 2rem;
+            object-fit: cover;
+            border: 4px solid #f0f0f0;
+        }
+
+        /* 标题样式 */
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .title {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        /* 简介文本 */
+        .bio {
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            color: #555;
+            font-size: 1.05rem;
+        }
+
+        /* 链接列表 */
+        .links {
+            list-style: none;
+            margin-bottom: 2.5rem;
+        }
+
+        .links li {
+            margin: 0.8rem 0;
+        }
+
+        .links a {
+            color: #2c3e50;
+            text-decoration: none;
+            font-size: 1.05rem;
+            padding: 0.5rem;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s;
+        }
+
+        .links a:hover {
+            border-bottom: 1px solid #3498db;
+        }
+
+        /* 页脚 */
+        footer {
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 3rem;
+        }
+    </style>
 </head>
 <body>
-  <h1>Hello, GitHub Pages!</h1>
-  <p>this is my page</p>
-  <img 
-  src="Mrbean.png"  <!-- 本地图片的相对路径 -->
-  alt="我的个人照片"          <!-- 图片描述 -->
-  class="w-64 h-64 object-cover rounded-full mx-auto"  <!-- 可选样式：圆形、居中、自适应等 -->
->
+    <div class="container">
+        <!-- 头像 -->
+        <img src="https://picsum.photos/320/320?random=1" alt="个人头像" class="avatar">
+
+        <!-- 基本信息 -->
+        <h1>张明</h1>
+        <p class="title">前端开发者 / 设计爱好者</p>
+
+        <!-- 简介 -->
+        <p class="bio">
+            专注于创建优雅、高效的用户界面，热爱简约设计与前沿技术。
+            喜欢在代码中寻找平衡与美感，偶尔分享技术心得。
+        </p>
+
+        <!-- 链接 -->
+        <ul class="links">
+            <li><a href="https://github.com" target="_blank">GitHub</a></li>
+            <li><a href="mailto:example@mail.com">邮箱</a></li>
+            <li><a href="https://blog.example.com">博客</a></li>
+            <li><a href="resume.pdf" target="_blank">简历</a></li>
+        </ul>
+
+        <!-- 页脚 -->
+        <footer>
+            © 2023 个人主页 | 极简设计
+        </footer>
+    </div>
 </body>
 </html>
