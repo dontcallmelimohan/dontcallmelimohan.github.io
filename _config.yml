@@ -1,0 +1,9 @@
+# _config.yml
+title: "我的博客"          # 网站标题
+description: "这是我的 GitHub Pages 博客"  # 网站描述
+baseurl: ""               # 若网站部署在子路径（如 /blog），需填写，否则留空
+url: "https://username.github.io"  # 网站完整 URL
+theme: minima             # 使用官方主题（可选，如 minima、jekyll-theme-cayman 等）
+plugins:                  # 启用的插件（GitHub Pages 支持的插件列表见官方文档）
+  - jekyll-feed           # 生成 RSS 订阅
+  - jekyll-seo-tag        # 优化 SEO
