@@ -1,120 +1,303 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>个人主页</title>
-    <style>
-        /* 基础样式重置 */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <title>Stratton Oakmont Inc.</title>
+    <!-- 外部资源 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Long+Cang&display=swap" rel="stylesheet">
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
+    <!-- Tailwind 配置（蓝色系核心保留） -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0F3460', // 英雄区主蓝
+                        secondary: '#1A73E8', // 辅助蓝
+                        accent: '#E6B325', // 保留强调黄用于突出交互
+                        dark: '#16213E', // 英雄区深蓝
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                        'long-cang': ['Long Cang', 'cursive'] // 注册字体
+                    },
+                },
+            }
         }
+    </script>
 
-        /* 布局容器 */
-        .container {
-            text-align: center;
-        }
-
-        /* 头像样式 */
-        .avatar {
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            margin: 0 auto 2rem;
-            object-fit: cover;
-            border: 4px solid #f0f0f0;
-        }
-
-        /* 标题样式 */
-        h1 {
-            font-size: 2.2rem;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-
-        .title {
-            color: #666;
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-        }
-
-        /* 简介文本 */
-        .bio {
-            max-width: 600px;
-            margin: 0 auto 2.5rem;
-            color: #555;
-            font-size: 1.05rem;
-        }
-
-        /* 链接列表 */
-        .links {
-            list-style: none;
-            margin-bottom: 2.5rem;
-        }
-
-        .links li {
-            margin: 0.8rem 0;
-        }
-
-        .links a {
-            color: #2c3e50;
-            text-decoration: none;
-            font-size: 1.05rem;
-            padding: 0.5rem;
-            border-bottom: 1px solid transparent;
-            transition: border-color 0.3s;
-        }
-
-        .links a:hover {
-            border-bottom: 1px solid #3498db;
-        }
-
-        /* 页脚 */
-        footer {
-            color: #888;
-            font-size: 0.9rem;
-            margin-top: 3rem;
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto { content-visibility: auto; }
+            .text-shadow { text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+            .bg-gradient-blue { background: linear-gradient(135deg, #5587c4 0%, #233462 100%); } /* 英雄区渐变蓝 */
+            .hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+            .hover-lift:hover { transform: translateY(-5px); box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); }
+            .glass-blue { 
+                background: rgba(15, 52, 96, 0.5); /* 主蓝半透明 */
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+            }
+            /* 新增：微信图标悬浮显示二维码的样式 */
+            .wechat-qr-container {
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+                transform: translateY(10px);
+            }
+            .wechat-icon:hover .wechat-qr-container {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <!-- 头像 -->
-        <img src="https://picsum.photos/320/320?random=1" alt="个人头像" class="avatar">
 
-        <!-- 基本信息 -->
-        <h1>张明</h1>
-        <p class="title">前端开发者 / 设计爱好者</p>
+<!-- 全局统一英雄区背景图 + 蓝色系氛围 -->
 
-        <!-- 简介 -->
-        <p class="bio">
-            专注于创建优雅、高效的用户界面，热爱简约设计与前沿技术。
-            喜欢在代码中寻找平衡与美感，偶尔分享技术心得。
-        </p>
+<body class="font-inter text-white overflow-x-hidden bg-[url('p2.png')] bg-cover bg-fixed bg-center">
+    <!-- 全局背景蒙版（深蓝半透明，强化蓝色系） -->
+    <div class="fixed inset-0 bg-dark/40 z-[-1]"></div>
 
-        <!-- 链接 -->
-        <ul class="links">
-            <li><a href="https://github.com" target="_blank">GitHub</a></li>
-            <li><a href="mailto:example@mail.com">邮箱</a></li>
-            <li><a href="https://blog.example.com">博客</a></li>
-            <li><a href="resume.pdf" target="_blank">简历</a></li>
-        </ul>
+    <!-- 导航栏（蓝色系适配，核心修改区域） -->
 
-        <!-- 页脚 -->
-        <footer>
-            © 2023 个人主页 | 极简设计
-        </footer>
-    </div>
+    <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 bg-transparent">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <!-- 左侧Logo与文字组合：Logo+中文+英文垂直排列 -->
+            <a href="#" class="flex flex-row items-center gap-3">
+                <!-- Logo图片：保持原尺寸，与文字垂直居中 -->
+                <img src="logo2.png" alt="Stratton Oakmont Inc. Logo" style="width:120px; height:auto;">
+
+                <!-- 文字组：中文在上，英文在下，垂直排列 -->
+                <div class="flex flex-col justify-center">
+                    <!-- 中文名称：保留书法字体，突出品牌辨识度 -->
+                    <div class="font-long-cang text-3xl text-white">默涵叔叔私募基金</div>
+                    <!-- 优化英文：优雅衬线字体，可直接调整size值改大小 -->
+                    <div style="
+                    font-family: 'Playfair Display', Georgia, 'Times New Roman', Times, serif; /* 优雅衬线字体组合 */
+                    font-size: 14px; /* 可调整：16px/18px/20px 适配不同需求 */
+                    color: rgba(255, 255, 255, 1); 
+                    margin-top: 4px; 
+                    font-weight: 500;
+                    letter-spacing: 0.5px; /* 轻微 letter-spacing 增强优雅感 */
+                ">Uncle Mohan Partnership Ltd.</div>
+                </div>
+            </a>
+        </div>
+    </header>
+
+    <!-- 英雄区（保留原渐变蓝核心） -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden bg-gradient-blue">
+        <div class="absolute inset-0 opacity-20 bg-[url('building.jpg')] bg-cover bg-center mix-blend-overlay">
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-b from-dark/25 to-dark/50"></div>
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <h1 class="text-[clamp(2.5rem,8vw,5rem)] font-bold text-white leading-tight mb-6 text-shadow">Invest in us
+            </h1>
+            <p class="text-[clamp(1.2rem,3vw,1.8rem)] text-white/90 max-w-3xl mx-auto mb-10">Don't miss out! Put your
+                money in our private fund.</p>
+        </div>
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
+            <a href="#about" class="flex flex-col items-center"><span class="text-sm mb-2">Scroll Down</span><i
+                    class="fa fa-chevron-down"></i></a>
+        </div>
+    </section>
+
+    <!-- 关于我们部分（全蓝色系重构） -->
+    <section id="about" class="py-20">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- 标题区（蓝色玻璃质感） -->
+            <div class="glass-blue p-8 rounded-2xl mb-16 text-center">
+                <h2 class="text-4xl font-bold text-white mb-4">About Us</h2>
+                <p class="text-xl text-white/80 max-w-3xl mx-auto">We are a global private equity firm focused on
+                    long-term value creation through strategic investments and operational improvements.</p>
+            </div>
+
+            <!-- 卡片区（蓝色玻璃质感） -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-blue p-8 rounded-2xl shadow-md hover-lift">
+                    <div class="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-globe text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4 text-white">Global Reach</h3>
+                    <p class="text-white/80">We have a truly global perspective on
+                        investment opportunities.</p>
+                </div>
+
+                <div class="glass-blue p-8 rounded-2xl shadow-md hover-lift">
+                    <div class="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-chart-line text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4 text-white">Proven Track Record</h3>
+                    <p class="text-white/80">The return on investment is stable, and your money will double after ten
+                        years.</p>
+                </div>
+
+                <div class="glass-blue p-8 rounded-2xl shadow-md hover-lift">
+                    <div class="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-handshake text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4 text-white">Partnership Approach</h3>
+                    <p class="text-white/80">We work closely with management teams to build stronger, more sustainable
+                        businesses.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 收款码板块（全蓝色系重构） -->
+    <section class="py-20">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- 标题区（蓝色玻璃质感） -->
+            <div class="glass-blue p-8 rounded-2xl mb-16 text-center">
+                <h2 class="text-4xl font-bold text-white mb-4">Payment Methods</h2>
+                <p class="text-xl text-white/80 max-w-3xl mx-auto">Choose your preferred payment method for
+                    transactions.</p>
+                <p class="text-xl text-white/80 max-w-3xl mx-auto">We thank you for your investment.</p>
+            </div>
+
+            <!-- 收款码卡片（蓝色玻璃质感） -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="glass-blue p-8 rounded-2xl shadow-md hover-lift text-center">
+                    <h3 class="text-2xl font-semibold mb-6 text-white">Alipay</h3>
+                    <img src="alipay.jpg" alt="Alipay QR Code for payment"
+                        class="mx-auto mb-4 w-40 rounded-lg border-2 border-white/30">
+                    <p class="text-white/80">Scan to pay via Alipay</p>
+                </div>
+
+                <div class="glass-blue p-8 rounded-2xl shadow-md hover-lift text-center">
+                    <h3 class="text-2xl font-semibold mb-6 text-white">WeChat Pay</h3>
+                    <img src="wechat.jpg" alt="WeChat Pay QR Code for payment"
+                        class="mx-auto mb-4 w-40 rounded-lg border-2 border-white/30">
+                    <p class="text-white/80">Scan to pay via WeChat Pay</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 底部（全蓝色系重构，已修改微信图标） -->
+    <footer class="py-12 bg-dark/70">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- 社交区（蓝色玻璃质感） -->
+            <div class="glass-blue p-8 rounded-2xl mb-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="mb-6 md:mb-0">
+                        <span class="font-bold text-accent text-2xl">Uncle Mohan Partnership Ltd.</span>
+                        <p class="text-white/70 mt-2">Global Private Equity Partners</p>
+                    </div>
+
+                    <div class="flex space-x-4">
+                        <a href="https://x.com/limohanx"
+                            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-accent hover:text-dark transition-colors"
+                            title="Twitter" target="_blank">
+                            <i class="fab fa-twitter text-white"></i>
+                        </a>
+                        <a href="https://www.instagram.com/limohanzz/"
+                            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-accent hover:text-dark transition-colors"
+                            title="Instagram" target="_blank">
+                            <i class="fab fa-instagram text-white"></i>
+                        </a>
+                        <!-- 已修改：微信图标 + 悬浮二维码容器 -->
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-accent hover:text-dark transition-colors relative wechat-icon"
+                            title="WeChat">
+                            <i class="fab fa-weixin text-white"></i>
+                            <!-- 悬浮显示的二维码容器 -->
+                            <div
+                                class="wechat-qr-container absolute bottom-full right-0 mb-2 w-48 rounded-lg border-2 border-white/30 shadow-2xl z-50">
+                                <!-- 注意：替换下方src为你的微信二维码图片实际路径 -->
+                                <img src="wechatcode.jpg" alt="WeChat QR Code" class="w-full h-auto rounded">
+                            </div>
+                        </a>
+                        <a href="https://www.zhihu.com/people/limohanzz"
+                            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-accent hover:text-dark transition-colors"
+                            title="zhihu" target="_blank">
+                            <i class="fa-brands fa-zhihu text-white"></i>
+                        </a>
+                        <a href="https://www.douyin.com/user/MS4wLjABAAAAiDITQLE3UExIN6xFJ1-OkhtBgA-7TJgMl--GOx8zxt4kb14339cbl6frtvDzeMCE?from_tab_name=main"
+                            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-accent hover:text-dark transition-colors"
+                            title="douyin" target="_blank">
+                            <i class="fa-brands fa-tiktok text-white"></i>
+                        </a>
+                        <a href="https://www.xiaohongshu.com/user/profile/66927b3b00000000030335d3?xsec_token=ABQ2-5GxWk3AvujROnvwY1JfG3CORV7uwqzmO1mpkk5PU%3D&xsec_source=pc_search"
+                            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-accent hover:text-dark transition-colors"
+                            title="小红书" target="_blank">
+                            <i class="fa-solid fa-book text-white"></i>
+                        </a>
+                        <a href="https://github.com/dontcallmelimohan"
+                            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-accent hover:text-dark transition-colors"
+                            title="github" target="_blank">
+                            <i class="fa-brands fa-github text-white"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 网站建立时间（蓝色系适配） -->
+            <div class="text-center text-sm text-white/70 mb-8 font-light tracking-wide">
+                Established for <span id="siteAge" class="text-accent font-medium tracking-normal"></span>
+            </div>
+
+            <!-- 版权信息（蓝色系适配） -->
+            <div class="text-center text-sm text-white/50 border-t border-white/10 pt-8">
+                &copy; 2025 Uncle Mohan Partnership Ltd. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript（功能不变） -->
+    <script>
+        // 导航栏滚动效果（蓝色系适配）
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('bg-primary/90 backdrop-blur-sm shadow-md', window.scrollY > 50);
+            navbar.classList.toggle('bg-transparent', window.scrollY <= 50);
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', e => {
+                e.preventDefault();
+                const target = document.querySelector(anchor.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // 网站建立时间计算
+        function calculateSiteAge() {
+            const launchDate = new Date(2025, 8, 20, 0, 0, 0);
+            const currentDate = new Date();
+            const timeDiff = Math.max(0, currentDate - launchDate);
+
+            const seconds = Math.floor((timeDiff / 1000) % 60);
+            const minutes = Math.floor((timeDiff / (1000 * 60)) % 60);
+            const hours = Math.floor((timeDiff / (1000 * 60 * 60)) % 24);
+            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+
+            let ageText = '';
+            ageText += `${days} days `;
+            ageText += `${hours} hrs `;
+            ageText += `${minutes} Min `;
+            ageText += `${seconds} Sec`;
+
+            document.getElementById('siteAge').textContent = ageText;
+        }
+
+        calculateSiteAge();
+        setInterval(calculateSiteAge, 1000);
+    </script>
 </body>
+
 </html>
