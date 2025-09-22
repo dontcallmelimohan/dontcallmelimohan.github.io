@@ -73,24 +73,24 @@
 
     <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 bg-transparent">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            <!-- 左侧Logo与文字组合：Logo+中文+英文垂直排列 -->
+            <!-- 左侧Logo与文字组合：Logo+中文+英文垂直排列（已添加响应式） -->
             <a href="#" class="flex flex-row items-center gap-3">
-                <!-- Logo图片：保持原尺寸，与文字垂直居中 -->
-                <img src="logo2.png" alt="Stratton Oakmont Inc. Logo" style="width:120px; height:auto;">
+                <!-- Logo图片：响应式宽度，小屏80px起，大屏最大120px -->
+                <img src="logo2.png" alt="Stratton Oakmont Inc. Logo" class="w-[clamp(80px,15vw,120px)] h-auto">
 
-                <!-- 文字组：中文在上，英文在下，垂直排列 -->
+                <!-- 文字组：中文在上，英文在下，垂直排列（已添加响应式） -->
                 <div class="flex flex-col justify-center">
-                    <!-- 中文名称：保留书法字体，突出品牌辨识度 -->
-                    <div class="font-long-cang text-3xl text-white">默涵叔叔私募基金</div>
-                    <!-- 优化英文：优雅衬线字体，可直接调整size值改大小 -->
+                    <!-- 中文名称：响应式字体，小屏1.5rem，大屏最大2.5rem -->
+                    <div class="font-long-cang text-[clamp(1.5rem,3vw,2.5rem)] text-white">默涵叔叔私募基金</div>
+                    <!-- 英文名称：响应式字体，小屏0.75rem，大屏最大0.875rem（14px） -->
                     <div style="
-                    font-family: 'Playfair Display', Georgia, 'Times New Roman', Times, serif; /* 优雅衬线字体组合 */
-                    font-size: 14px; /* 可调整：16px/18px/20px 适配不同需求 */
-                    color: rgba(255, 255, 255, 1); 
-                    margin-top: 4px; 
-                    font-weight: 500;
-                    letter-spacing: 0.5px; /* 轻微 letter-spacing 增强优雅感 */
-                ">Uncle Mohan Partnership Ltd.</div>
+                font-family: 'Playfair Display', Georgia, 'Times New Roman', Times, serif;
+                font-size: clamp(0.75rem, 1.5vw, 0.875rem); /* 响应式尺寸 */
+                color: rgba(255, 255, 255, 1); 
+                margin-top: 4px; 
+                font-weight: 500;
+                letter-spacing: 0.5px;
+            ">Uncle Mohan Partnership Ltd.</div>
                 </div>
             </a>
         </div>
